@@ -15,9 +15,9 @@ spec:
                 restartPolicy: Never
                 containers:
                   - name: e2e-smoke
-                    image: chaossnowflake/web-app-tests:1.0.1
+                    image: chaossnowflake/web-app-tests:1.0.2
                     imagePullPolicy: IfNotPresent
-                    args: ["test", "-Dapp.host=http://web-app-preview"]
+                    args: ["test", "-Dapp.host=http://web-app-preview", "-Dapp.runType=smoke"]
     - name: e2e-tests-regression
       provider:
         job:
@@ -29,6 +29,6 @@ spec:
                 restartPolicy: Never
                 containers:
                   - name: e2e-regression
-                    image: chaossnowflake/web-app-tests:1.0.1
+                    image: chaossnowflake/web-app-tests:1.0.2
                     imagePullPolicy: IfNotPresent
-                    args: ["test", "-Dapp.host=http://web-app-preview"]
+                    args: ["test", "-Dapp.host=http://web-app-preview", "-Dapp.runType=regression"]
