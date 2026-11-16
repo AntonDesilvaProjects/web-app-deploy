@@ -4,7 +4,7 @@ metadata:
   name: web-app-e2e
 spec:
   metrics:
-    - name: e2e-tests
+    - name: e2e-tests-smoke
       provider:
         job:
           spec:
@@ -14,7 +14,21 @@ spec:
               spec:
                 restartPolicy: Never
                 containers:
-                  - name: e2e
+                  - name: e2e-smoke
+                    image: chaossnowflake/web-app-tests:1.0.1
+                    imagePullPolicy: IfNotPresent
+                    args: ["test", "-Dapp.host=http://web-app-preview"]
+    - name: e2e-tests-regression
+      provider:
+        job:
+          spec:
+            backoffLimit: 0
+            activeDeadlineSeconds: 600
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: e2e-regression
                     image: chaossnowflake/web-app-tests:1.0.1
                     imagePullPolicy: IfNotPresent
                     args: ["test", "-Dapp.host=http://web-app-preview"]
