@@ -6,7 +6,7 @@ metadata:
     app: web-app
 spec:
   # properties of the deployment itself
-  replicas: "{{ .Values.replicaCount }}"
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels: # lable used to find the pods that are part of the deployment
       app: web-app
