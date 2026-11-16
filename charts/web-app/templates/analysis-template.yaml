@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: web-app-e2e
+spec:
+  metrics:
+    - name: e2e-tests
+      provider:
+        job:
+          spec:
+            backoffLimit: 0
+            activeDeadlineSeconds: 600
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: e2e
+                    image: chaossnowflake/web-app-tests:1.0.1
+                    imagePullPolicy: IfNotPresent
+                    args: ["test", "-Dapp.host=http://web-app-preview"]

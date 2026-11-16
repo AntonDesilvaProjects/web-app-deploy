@@ -36,3 +36,11 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 # port forward the argocd service so our local can access the UI at https://localhost:8081
 kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
+### Setting up Argo Rollouts
+
+```bash
+kubectl create namespace argo-rollouts
+kubectl apply --server-side --force-conflicts -n argo-rollouts \
+  -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+kubectl wait --for=condition=available deployment/argo-rollouts -n argo-rollouts --timeout=120s
+```
