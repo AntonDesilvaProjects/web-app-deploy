@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: web-app
-          image: chaossnowflake/web-app:1.0.4
+          image: chaossnowflake/web-app:1.0.5
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
